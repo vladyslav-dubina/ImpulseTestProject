@@ -10,8 +10,10 @@ It is worth noting that the application uses a PostgreSQL database.
  - [Docker] - Toolkit for managing isolated Linux containers.
  - [Swager] - Can help you design and document your APIs at scale.
  - [TypeORM] - TypeORM is an ORM that can run in NodeJS.
- - [ESLint] - statically analyzes your code to quickly find problems. It is built into most text editors and you can run ESLint as part of your continuous integration pipeline.
- - [Prettier] - is an opinionated code formatter. It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
+ - [ESLint] - statically analyzes your code to quickly find problems.
+ - [Prettier] - is an opinionated code formatter.
+
+[![Tech](https://skillicons.dev/icons?i=nestjs,postgres,docker,js,ts,git)](https://skillicons.dev)
 
 ## Installation
 
