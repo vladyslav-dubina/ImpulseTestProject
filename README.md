@@ -4,6 +4,11 @@ This is a test example of the Nest JS server for the Impulse team.
 The task can be viewed [here](https://impulseteam.notion.site/Node-js-Engineer-cfb8332b00ee499b889b1aec7d5c6bc7).
 It is worth noting that the application uses a PostgreSQL database.
 
+## Tech
+ - [NestJS] - A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
+ - [PostgreSQL] - The World's Most Advanced Open Source Relational Database
+ - [Docker] - Toolkit for managing isolated Linux containers.
+ - [Swager] - Can help you design and document your APIs at scale.
 ## Installation
 
 ```bash
@@ -95,3 +100,8 @@ $ npm run format
 $ npm run lint
 
 ```
+
+[NestJS]: <https://nestjs.com/>
+[PostgreSQL]: <https://www.postgresql.org/>
+[Swager]: <https://swagger.io/>
+[Docker]: <https://www.docker.com/>
