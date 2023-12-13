@@ -23,22 +23,6 @@ export class UserForAllRerurn {
   email?: string;
 }
 
-export class DeleteRes {
-  @ApiProperty()
-  raw: [];
-  @ApiProperty()
-  affected: number;
-}
-
-export class UpdateRes {
-  @ApiProperty()
-  generatedMaps: [];
-  @ApiProperty()
-  raw: [];
-  @ApiProperty()
-  affected: number;
-}
-
 export class UserOBJ {
   id: number;
 

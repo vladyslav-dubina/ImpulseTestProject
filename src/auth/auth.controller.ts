@@ -26,6 +26,9 @@ import { swagerAuthToken } from 'src/utils';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  /**
+   * User authorization path
+   */
   @ApiTags('auth')
   @ApiResponse({
     status: 200,
@@ -43,6 +46,9 @@ export class AuthController {
     return await this.authService.signIn(signInDto.email, signInDto.password);
   }
 
+  /**
+   * User registration path
+   */
   @ApiTags('auth')
   @ApiResponse({ status: 200, description: 'User successfully registered.' })
   @ApiResponse({
@@ -56,6 +62,9 @@ export class AuthController {
     return await this.authService.signUp(userDtoData);
   }
 
+  /**
+   * User logout path
+   */
   @ApiTags('auth')
   @ApiResponse({ status: 200, description: 'User successfully logouted.' })
   @ApiHeader(swagerAuthToken)
@@ -65,6 +74,9 @@ export class AuthController {
     this.authService.logout(req.user.id);
   }
 
+  /**
+   * User refresh token path
+   */
   @ApiTags('auth')
   @ApiResponse({ status: 200, description: 'Token successfully updated.' })
   @ApiResponse({ status: 403, description: 'Access Denied.' })
