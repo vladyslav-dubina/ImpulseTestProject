@@ -126,6 +126,9 @@ Build the container
 $ docker compose up
 ```
 
+## API DOCS
+Information about API routes can be found on the swager document page. Path to page ```/api```
+
 [NestJS]: <https://nestjs.com/>
 [PostgreSQL]: <https://www.postgresql.org/>
 [Swager]: <https://swagger.io/>
