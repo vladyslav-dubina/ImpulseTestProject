@@ -7,7 +7,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
-import { schemaValidation } from '../utils';
 
 @Injectable()
 export class UserService {
@@ -23,14 +22,9 @@ export class UserService {
    */
   async create(data: UserDto): Promise<any> {
     try {
-      const validation = await schemaValidation(data, 'User');
-      if (!validation.error) {
-        const user = await this.userRepository.create(data as any);
-        const res = await this.userRepository.save(user);
-        return res;
-      } else {
-        throw new BadRequestException(validation.message);
-      }
+      const user = await this.userRepository.create(data as any);
+      const res = await this.userRepository.save(user);
+      return res;
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

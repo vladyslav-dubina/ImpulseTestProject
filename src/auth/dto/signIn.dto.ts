@@ -1,10 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 
 export class SignInDTO {
   @ApiProperty()
-  password: string;
+  @IsNotEmpty()
+  @MinLength(6)
+  password?: string;
+
   @ApiProperty()
-  email: string;
+  @IsEmail()
+  @IsNotEmpty()
+  email?: string;
 }
 
 export class TokenAnswer {

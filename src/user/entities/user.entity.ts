@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { IsEmail, Min, Max } from 'class-validator';
+import { IsEmail, MinLength, MaxLength } from 'class-validator';
 
 @Entity()
 export class User {
@@ -17,8 +17,8 @@ export class User {
   email: string;
 
   @Column({ unique: true })
-  @Min(10)
-  @Max(1024)
+  @MinLength(10)
+  @MaxLength(1024)
   hash: string;
 
   @Column({ default: false })
