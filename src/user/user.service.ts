@@ -56,6 +56,7 @@ export class UserService {
         'email',
         'isActive',
         'refreshToken',
+        'role',
       ],
     });
     if (!user) {

@@ -7,8 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import DBHandler from './database/database.config';
 import { UserOBJ } from './user/dto/user.dto';
-import { config as dotenvConfig } from 'dotenv';
-import { PassportModule } from '@nestjs/passport';
 
 declare global {
   namespace Express {

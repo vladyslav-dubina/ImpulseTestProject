@@ -29,7 +29,8 @@ export class AuthService {
   /**
    * The updateRefreshToken function update refresh token by creating a hash from the token,
    *  and updating the entry in the database using the update function belonging to userService.
-   * Receives two variables userId and refreshToken as input.
+   * @param userId is user db id
+   * @param refreshToken is user refresh token.
    */
   async updateRefreshToken(userId: number, refreshToken: string) {
     const hashedRefreshToken = await this.hashData(refreshToken);
@@ -40,7 +41,8 @@ export class AuthService {
 
   /**
    * The getTokens function create refresh and access tokens using this.jwtService.signAsync.
-   * Receives two variables userId and username as input, which will be used to create tokens.
+   * @param userId is user db id
+   * @param username is user name.
    * Returns an object consisting of refresh and access tokens
    */
   async getTokens(userId: number, username: string): Promise<TokenAnswer> {
@@ -76,13 +78,12 @@ export class AuthService {
   /**
    * The signUp function checks whether the user exists, then creates account and tokens and updates the token in the database record.
    * Receives createUserDto object as input, which will be used to create account and tokens.
+   * @param createUserDto is object of UserDto type
    * Returns an object consisting of refresh and access tokens
    */
   async signUp(createUserDto: UserDto): Promise<TokenAnswer> {
     const exist = await this.userService.findByEmail(createUserDto.email);
-    console.log(exist);
     if (exist) throw new BadRequestException('Email already exists!');
-    console.log('tata');
     createUserDto.hash = await this.hashData(createUserDto.password);
     const user = await this.userService.create(createUserDto);
     const tokens = await this.getTokens(user.id, user.firstName);
@@ -93,6 +94,8 @@ export class AuthService {
   /**
    * The signIp function checks whether the user login and password is correct, then creates tokens and updates the token in the database record.
    * Receives two variables email and pass as input.
+   * @param email is user email
+   * @param pass is inputed password
    * Returns an object consisting of refresh and access tokens
    */
   async signIn(email: string, pass: string): Promise<TokenAnswer> {
@@ -105,14 +108,13 @@ export class AuthService {
       await this.updateRefreshToken(user.id, tokens.refreshToken);
       return tokens;
     } catch (error) {
-      console.log(error);
       throw new InternalServerErrorException(error);
     }
   }
 
   /**
    * The logout function removes a refresh token from a record in the database.
-   * Receives userId as input.
+   * @param userId is user db id
    */
   async logout(userId: number) {
     return this.userService.update(userId, { refreshToken: null });
@@ -120,7 +122,8 @@ export class AuthService {
 
   /**
    * The refreshTokens function updates the record token in the database. If there is no user or user token is empty, it returns access denial.
-   * Receives two variables userId and refreshToken as input.
+   * @param userId is user db id
+   * @param refreshToken is user refresh token.
    */
   async refreshTokens(userId: number, refreshToken: string) {
     const user = await this.userService.findByID(userId);

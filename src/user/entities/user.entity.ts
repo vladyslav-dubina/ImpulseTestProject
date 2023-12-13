@@ -24,6 +24,9 @@ export class User {
   @Column({ default: false })
   isActive: boolean;
 
+  @Column({ default: 'CLIENT' })
+  role: string;
+
   @Column('text', { unique: true, nullable: true })
   refreshToken!: string;
 }

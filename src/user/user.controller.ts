@@ -14,6 +14,10 @@ import { Request } from 'express';
 import { AccessTokenGuard } from 'src/guards/accessToken.guard';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enums/role.enum';
+import { RoleGuard } from 'src/guards/role.guard';
+import { RefreshTokenGuard } from 'src/guards/refreshToken.guard';
 
 @Controller('user')
 export class UserController {
@@ -29,8 +33,16 @@ export class UserController {
     type: [UserForAllRerurn],
   })
   @ApiResponse({ status: 500, description: 'ServerError' })
+  @ApiResponse({
+    status: 403,
+    description: `The user's role does not match the required role`,
+  })
   @Get()
-  @UseGuards(AccessTokenGuard)
+  /**
+   * Example for RoleGuard, AccessTokenGuard, and RefreshTokenGuard. If you logout, then using RefreshToken will not connect
+   */
+  @Roles(Role.GUEST)
+  @UseGuards(RefreshTokenGuard, RoleGuard)
   async findAll() {
     return await this.userService.findAll();
   }

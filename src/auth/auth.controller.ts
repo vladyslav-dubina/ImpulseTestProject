@@ -14,12 +14,7 @@ import { UserDto } from 'src/user/dto/user.dto';
 import { AccessTokenGuard } from 'src/guards/accessToken.guard';
 import { Request } from 'express';
 import { RefreshTokenGuard } from 'src/guards/refreshToken.guard';
-import {
-  ApiCreatedResponse,
-  ApiHeader,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { swagerAuthToken } from 'src/utils';
 
 @Controller('auth')

@@ -16,6 +16,7 @@ export class SignInDTO {
 export class TokenAnswer {
   @ApiProperty()
   accessToken: string;
+
   @ApiProperty()
   refreshToken: string;
 }

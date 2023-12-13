@@ -27,6 +27,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       user.email,
       user.isActive,
       user.refreshToken,
+      user.role.split(','),
     );
     return authUser;
   }

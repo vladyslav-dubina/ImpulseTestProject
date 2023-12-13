@@ -22,16 +22,22 @@ export class UserDto {
   @IsNotEmpty()
   email?: string;
 
+  role?: string;
+
   hash?: string;
+
   refreshToken?: string;
+
   isActive?: boolean;
 }
 
 export class UserForAllRerurn {
   @ApiProperty()
-  firstName?: string;
+  id?: string;
+
   @ApiProperty()
-  secondName?: string;
+  firstName?: string;
+
   @ApiProperty()
   email?: string;
 }
@@ -47,17 +53,21 @@ export class UserOBJ {
 
   isActive: boolean;
 
+  role: string[];
+
   constructor(
     id: number,
     name: string,
     email: string,
     isActive: boolean,
     refreshToken: string,
+    role: string[],
   ) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.isActive = isActive;
     this.refreshToken = refreshToken;
+    this.role = role;
   }
 }
