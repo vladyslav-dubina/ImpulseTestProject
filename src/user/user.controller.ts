@@ -11,13 +11,13 @@ import {
 import { UserService } from './user.service';
 import { UserDto, UserForAllRerurn } from './dto/user.dto';
 import { Request } from 'express';
-import { AccessTokenGuard } from 'src/guards/accessToken.guard';
+import { AccessTokenGuard } from '../guards/accessToken.guard';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { Roles } from 'src/decorators/roles.decorator';
-import { Role } from 'src/enums/role.enum';
-import { RoleGuard } from 'src/guards/role.guard';
-import { RefreshTokenGuard } from 'src/guards/refreshToken.guard';
+import { Roles } from '../decorators/roles.decorator';
+import { Role } from '../enums/role.enum';
+import { RoleGuard } from '../guards/role.guard';
+import { RefreshTokenGuard } from '../guards/refreshToken.guard';
 
 @Controller('user')
 export class UserController {

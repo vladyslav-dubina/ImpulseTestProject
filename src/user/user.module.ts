@@ -4,7 +4,7 @@ import { UserController } from './user.controller';
 import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
-import { AccessContorlService } from 'src/access-contorl-service/access-contorl-service.service';
+import { AccessContorlService } from '../access-contorl-service/access-contorl.service';
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({

@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AccessContorlServiceService } from './access-contorl-service.service';
+import { AccessContorlService } from './access-contorl.service';
 
 describe('AccessContorlServiceService', () => {
-  let service: AccessContorlServiceService;
+  let service: AccessContorlService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AccessContorlServiceService],
+      providers: [AccessContorlService],
     }).compile();
 
-    service = module.get<AccessContorlServiceService>(
-      AccessContorlServiceService,
+    service = module.get<AccessContorlService>(
+      AccessContorlService,
     );
   });
 

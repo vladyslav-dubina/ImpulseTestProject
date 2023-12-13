@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { UserService } from '../user/user.service';
 import { config as dotenvConfig } from 'dotenv';
-import { UserOBJ } from 'src/user/dto/user.dto';
+import { UserOBJ } from '../user/dto/user.dto';
 dotenvConfig({ path: '.env' });
 
 @Injectable()

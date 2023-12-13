@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDTO, TokenAnswer } from './dto/signIn.dto';
-import { UserDto } from 'src/user/dto/user.dto';
-import { AccessTokenGuard } from 'src/guards/accessToken.guard';
+import { UserDto } from '../user/dto/user.dto';
+import { AccessTokenGuard } from '../guards/accessToken.guard';
 import { Request } from 'express';
-import { RefreshTokenGuard } from 'src/guards/refreshToken.guard';
+import { RefreshTokenGuard } from '../guards/refreshToken.guard';
 import { ApiHeader, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { swagerAuthToken } from 'src/utils';
+import { swagerAuthToken } from '../utils';
 
 @Controller('auth')
 export class AuthController {
