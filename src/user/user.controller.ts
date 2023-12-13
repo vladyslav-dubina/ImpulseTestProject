@@ -58,7 +58,8 @@ export class UserController {
   })
   @ApiResponse({ status: 500, description: 'Profile not found' })
   @Get('/profile')
-  @UseGuards(AccessTokenGuard)
+  @Roles(Role.GUEST)
+  @UseGuards(RefreshTokenGuard, RoleGuard)
   async findUser(@Req() request: Request) {
     return await this.userService.findByID(+request.user.id);
   }
