@@ -1,6 +1,15 @@
-export class SignInDTO {
-    password: string;
+import { ApiProperty } from '@nestjs/swagger';
 
-    email: string;
-  }
-  
+export class SignInDTO {
+  @ApiProperty()
+  password: string;
+  @ApiProperty()
+  email: string;
+}
+
+export class TokenAnswer {
+  @ApiProperty()
+  accessToken: string;
+  @ApiProperty()
+  refreshToken: string;
+}

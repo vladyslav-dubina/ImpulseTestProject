@@ -11,13 +11,16 @@ dotenvConfig({ path: '.env' });
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
-  imports: [passportModule,
+  imports: [
+    passportModule,
     JwtModule.register({
       secret: process.env.TOKEN_SECRET,
       signOptions: { expiresIn: '1d' },
-    }), UserModule],
+    }),
+    UserModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, RefreshTokenStrategy],
   exports: [JwtModule],
 })
-export class AuthModule { }
+export class AuthModule {}

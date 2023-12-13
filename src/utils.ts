@@ -17,3 +17,8 @@ export const schemaValidation = async (
     return { error: false, message: '' };
   }
 };
+
+export const swagerAuthToken = {
+  name: 'Authorization',
+  description: 'Bearer Authorization token',
+};

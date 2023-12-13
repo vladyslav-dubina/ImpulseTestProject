@@ -23,7 +23,7 @@ declare global {
     UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [DBHandler]
+      load: [DBHandler],
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],

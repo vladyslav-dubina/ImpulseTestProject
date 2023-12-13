@@ -24,6 +24,6 @@ export class User {
   @Column({ default: false })
   isActive: boolean;
 
-  @Column('text',{ unique: true, nullable: true })
+  @Column('text', { unique: true, nullable: true })
   refreshToken!: string;
 }

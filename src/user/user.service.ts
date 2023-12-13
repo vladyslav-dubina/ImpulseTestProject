@@ -1,4 +1,8 @@
-import { InternalServerErrorException, BadRequestException, Injectable } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  BadRequestException,
+  Injectable,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
@@ -10,14 +14,14 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) { }
+  ) {}
 
   async create(data: UserDto): Promise<any> {
     try {
       const validation = await schemaValidation(data, 'User');
       if (!validation.error) {
         const user = await this.userRepository.create(data as any);
-        const res = await this.userRepository.save(user)
+        const res = await this.userRepository.save(user);
         return res;
       } else {
         throw new BadRequestException(validation.message);
@@ -37,17 +41,24 @@ export class UserService {
   async findByID(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id: id },
-      select: ['id', 'firstName', 'secondName', 'email', 'isActive', 'refreshToken'],
+      select: [
+        'id',
+        'firstName',
+        'secondName',
+        'email',
+        'isActive',
+        'refreshToken',
+      ],
     });
     if (!user) {
-      throw new InternalServerErrorException("Profile not found.");
+      throw new InternalServerErrorException('Profile not found.');
     }
-    return user
+    return user;
   }
 
   async findByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne({
-      where: { email: email }
+      where: { email: email },
     });
   }
 

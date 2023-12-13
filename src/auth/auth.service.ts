@@ -1,4 +1,9 @@
-import { InternalServerErrorException, BadRequestException, Injectable, ForbiddenException } from '@nestjs/common';
+import {
+  InternalServerErrorException,
+  BadRequestException,
+  Injectable,
+  ForbiddenException,
+} from '@nestjs/common';
 import * as crypto from 'crypto';
 import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
@@ -9,13 +14,16 @@ dotenvConfig({ path: '.env' });
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UserService, private jwtService: JwtService) { }
+  constructor(
+    private userService: UserService,
+    private jwtService: JwtService,
+  ) {}
 
   async signUp(createUserDto: UserDto): Promise<any> {
     const exist = await this.userService.findByEmail(createUserDto.email);
-    console.log(exist)
+    console.log(exist);
     if (exist) throw new BadRequestException('Email already exists!');
-    console.log('tata')
+    console.log('tata');
     createUserDto.hash = await this.hashData(createUserDto.password);
     const user = await this.userService.create(createUserDto);
     const tokens = await this.getTokens(user.id, user.firstName);
@@ -96,5 +104,4 @@ export class AuthService {
     await this.updateRefreshToken(user.id, tokens.refreshToken);
     return tokens;
   }
-
 }
