@@ -60,6 +60,8 @@ $ npm run test:cov
 
 ## Migrations
 
+This section will describe the fields for the .env file; an example of it can be found in the repository under the name .env_example
+
 ```bash
 # Automatic migration creation
 $ npm run migration:generate --name=MigrationName
