@@ -1,39 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { InternalServerErrorException, BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 import { schemaValidation } from '../utils';
-import { Answer } from '../utils';
-import * as crypto from 'crypto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
-  async create(data: UserDto): Promise<Answer> {
+  async create(data: UserDto): Promise<any> {
     try {
       const validation = await schemaValidation(data, 'User');
       if (!validation.error) {
-        const exist = await this.userRepository.findOneBy({
-          email: data.email,
-        });
-        if (exist) return { error: true, message: 'Email already exists!' };
-        data.salt = crypto.randomBytes(16).toString('hex');
-        data.hash = crypto
-          .pbkdf2Sync(data.password, data.salt, 1000, 64, 'sha512')
-          .toString('hex');
         const user = await this.userRepository.create(data as any);
-        await this.userRepository.save(user);
+        const res = await this.userRepository.save(user)
+        return res;
       } else {
-        return { error: true, message: validation.message };
+        throw new BadRequestException(validation.message);
       }
     } catch (error) {
-      console.log(error);
-      return { error: true, message: 'Server error' };
+      throw new InternalServerErrorException(error);
     }
   }
 
@@ -44,16 +34,29 @@ export class UserService {
     return res;
   }
 
-  async findByID(id: number) {
-    return await this.userRepository.findOneBy({ id: id });
+  async findByID(id: number): Promise<User> {
+    const user = await this.userRepository.findOne({
+      where: { id: id },
+      select: ['id', 'firstName', 'secondName', 'email', 'isActive', 'refreshToken'],
+    });
+    if (!user) {
+      throw new InternalServerErrorException("Profile not found.");
+    }
+    return user
   }
 
-  async findByEmail(email: string) {
-    return await this.userRepository.findOneBy({ email: email });
+  async findByEmail(email: string): Promise<User> {
+    return await this.userRepository.findOne({
+      where: { email: email }
+    });
   }
 
   update(id: number, data: UserDto) {
-    return this.userRepository.update({ id: id }, data);
+    try {
+      return this.userRepository.update({ id: id }, data);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   remove(id: number) {

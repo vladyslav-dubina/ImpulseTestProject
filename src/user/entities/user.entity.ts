@@ -19,13 +19,11 @@ export class User {
   @Column({ unique: true })
   @Min(10)
   @Max(1024)
-  salt: string;
-
-  @Column({ unique: true })
-  @Min(10)
-  @Max(1024)
   hash: string;
 
   @Column({ default: false })
   isActive: boolean;
+
+  @Column('text',{ unique: true, nullable: true })
+  refreshToken!: string;
 }

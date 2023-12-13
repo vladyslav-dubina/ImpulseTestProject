@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
+
 @Module({
   imports: [passportModule, TypeOrmModule.forFeature([User])],
   controllers: [UserController],

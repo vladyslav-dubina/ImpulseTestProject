@@ -1,21 +1,38 @@
-import { Body, Controller, Post, HttpCode, HttpStatus, HttpException, Res } from '@nestjs/common';
+import { Body, Controller, Post, HttpCode, HttpStatus, UseGuards, Get, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDTO } from './dto/signIn.dto';
+import { UserDto } from 'src/user/dto/user.dto';
+import { AccessTokenGuard } from 'src/guards/accessToken.guard';
+import { Request } from 'express';
+import { RefreshTokenGuard } from 'src/guards/refreshToken.guard';
 
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) { }
 
     @HttpCode(HttpStatus.OK)
-    @Post('login')
-    async signIn(@Body() signInDto: SignInDTO, @Res() response) {
-        const res = await this.authService.signIn(signInDto.email, signInDto.password)
-        if (res.code == 500) {
-            throw new HttpException(res.message, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        if (res.error && !res.code) {
-            throw new HttpException(res.message, HttpStatus.BAD_REQUEST);
-        } 
-        return response.header('auth-token', res.message).json({ error: false, message: 'Logged in!' });
+    @Post('signIn')
+    async signIn(@Body() signInDto: SignInDTO) {
+        return await this.authService.signIn(signInDto.email, signInDto.password);
+    }
+
+    @HttpCode(HttpStatus.OK)
+    @Post('signUp')
+    async create(@Body() userDtoData: UserDto) {
+        return await this.authService.signUp(userDtoData);
+    }
+
+    @UseGuards(AccessTokenGuard)
+    @Get('logout')
+    logout(@Req() req: Request) {
+        this.authService.logout(req.user.id);
+    }
+
+    @UseGuards(RefreshTokenGuard)
+    @Get('refresh')
+    refreshTokens(@Req() req: Request) {
+      const userId = req.user.id;
+      const refreshToken = req.user.refreshToken;
+      return this.authService.refreshTokens(userId, refreshToken);
     }
 }
