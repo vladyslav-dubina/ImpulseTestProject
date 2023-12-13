@@ -2,6 +2,7 @@
 
 This is a test example of the Nest JS server for the Impulse team.
 The task can be viewed [here](https://impulseteam.notion.site/Node-js-Engineer-cfb8332b00ee499b889b1aec7d5c6bc7).
+It is worth noting that the application uses a PostgreSQL database.
 
 ## Installation
 
@@ -10,6 +11,8 @@ $ npm install
 ```
 
 ## Environment
+
+This section will describe the fields for the .env file an example of it can be found in the repository under the name .env_example
 
 ```bash
 # database host
@@ -28,11 +31,15 @@ TOKEN_SECRET = superSecret
 
 ## Building the app
 
+This section will describe how run build scripts
+
 ```bash
 $ npm run build
 ```
 
 ## Running the app
+
+This section will describe how run start scripts
 
 ```bash
 # development
@@ -60,7 +67,7 @@ $ npm run test:cov
 
 ## Migrations
 
-This section will describe the fields for the .env file; an example of it can be found in the repository under the name .env_example
+This section will describe how run migrations scripts.
 
 ```bash
 # Automatic migration creation
@@ -77,6 +84,8 @@ $ npm run migration:run
 ```
 
 ## Lint and Format
+
+This section will describe how run lint and format scripts
 
 ```bash
 # Starts code formatting
