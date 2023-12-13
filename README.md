@@ -13,7 +13,7 @@ It is worth noting that the application uses a PostgreSQL database.
  - [ESLint] - statically analyzes your code to quickly find problems.
  - [Prettier] - is an opinionated code formatter.
 
-[![Tech](https://skillicons.dev/icons?i=nestjs,postgres,docker,js,ts,git)](https://skillicons.dev)
+https://skillicons.dev/icons?i=nestjs,postgres,docker,js,ts,git
 
 ## Installation
 
