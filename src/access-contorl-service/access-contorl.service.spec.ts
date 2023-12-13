@@ -9,9 +9,7 @@ describe('AccessContorlServiceService', () => {
       providers: [AccessContorlService],
     }).compile();
 
-    service = module.get<AccessContorlService>(
-      AccessContorlService,
-    );
+    service = module.get<AccessContorlService>(AccessContorlService);
   });
 
   it('should be defined', () => {

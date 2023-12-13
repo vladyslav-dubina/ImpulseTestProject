@@ -1,7 +1,4 @@
-import {
-  InternalServerErrorException,
-  Injectable,
-} from '@nestjs/common';
+import { InternalServerErrorException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { UserDto } from './dto/user.dto';
